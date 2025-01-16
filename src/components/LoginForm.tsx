@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { LockClosedIcon } from '@heroicons/react/24/solid'
 
 export default function LoginForm() {
@@ -8,10 +8,28 @@ export default function LoginForm() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
+  const [envUsername, setEnvUsername] = useState('')
+  const [envPassword, setEnvPassword] = useState('')
+
+  useEffect(() => {
+    const fetchEnvVariables = async () => {
+      try {
+        const response = await fetch('/api/auth')
+        const data = await response.json()
+        console.log('Fetched username:', data.username)
+        console.log('Fetched password:', data.password)
+        setEnvUsername(data.username)
+        setEnvPassword(data.password)
+      } catch (error) {
+        console.error('Error fetching environment variables:', error)
+      }
+    }
+
+    fetchEnvVariables()
+  }, [])
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const envUsername = process.env.NEXT_PUBLIC_USERNAME
-    const envPassword = process.env.NEXT_PUBLIC_PASSWORD
 
     if (userId === envUsername && password === envPassword) {
       localStorage.setItem('authenticated', 'true')
