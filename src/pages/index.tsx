@@ -12,9 +12,11 @@ import homeStore from '@/features/stores/home'
 import settingsStore from '@/features/stores/settings'
 import '@/lib/i18n'
 import { buildUrl } from '@/utils/buildUrl'
+import { useAuthCheck } from '@/utils/authCheck'
 import { YoutubeManager } from '@/components/youtubeManager'
 
 const Home = () => {
+  useAuthCheck()
   const bgUrl = homeStore((s) => `url(${buildUrl(s.backgroundImageUrl)})`)
   const messageReceiverEnabled = settingsStore((s) => s.messageReceiverEnabled)
   const modelType = settingsStore((s) => s.modelType)
