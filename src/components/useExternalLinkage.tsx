@@ -79,18 +79,23 @@ const useExternalLinkage = ({ handleReceiveTextFromWs }: Params) => {
     function connectWebsocket() {
       if (wsManager?.isConnected()) return wsManager.websocket
 
-      // Websocket関連の情報を取得
-      const token = process.env.NEXT_PUBLIC_JWT_TOKEN
-      const websocket_url =
-        process.env.NEXT_PUBLIC_EXTERNAL_LINKAGE_URL || `ws://localhost:8000/ws`
-
-      if (!token) {
-        console.error('JWT token is not defined. Please check .env file')
-        return null
-      }
-
-      console.log('Attempting to connect WebSocket with token:', websocket_url)
-      return new WebSocket(websocket_url, [token])
+      // サーバーからWebSocketの設定を取得
+      fetch('/api/getWebSocketConfig')
+        .then(response => response.json())
+        .then(data => {
+          const { token, websocketUrl } = data;
+          if (!token) {
+            console.error('JWT token is not defined. Please check server environment variables.')
+            return;
+          }
+          console.log('Attempting to connect WebSocket with token:', websocketUrl);
+          const ws = new WebSocket(websocketUrl, [token]);
+          webSocketStore.getState().initializeWebSocket(t, handlers, () => ws);
+        })
+        .catch(error => {
+          console.error('Failed to fetch WebSocket configuration:', error);
+        });
+      return null;
     }
 
     webSocketStore.getState().initializeWebSocket(t, handlers, connectWebsocket)
