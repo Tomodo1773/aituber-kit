@@ -81,21 +81,26 @@ const useExternalLinkage = ({ handleReceiveTextFromWs }: Params) => {
 
       // サーバーからWebSocketの設定を取得
       fetch('/api/getWebSocketConfig')
-        .then(response => response.json())
-        .then(data => {
-          const { token, websocketUrl } = data;
+        .then((response) => response.json())
+        .then((data) => {
+          const { token, websocketUrl } = data
           if (!token) {
-            console.error('JWT token is not defined. Please check server environment variables.')
-            return;
+            console.error(
+              'JWT token is not defined. Please check server environment variables.'
+            )
+            return
           }
-          console.log('Attempting to connect WebSocket with token:', websocketUrl);
-          const ws = new WebSocket(websocketUrl, [token]);
-          webSocketStore.getState().initializeWebSocket(t, handlers, () => ws);
+          console.log(
+            'Attempting to connect WebSocket with token:',
+            websocketUrl
+          )
+          const ws = new WebSocket(websocketUrl, [token])
+          webSocketStore.getState().initializeWebSocket(t, handlers, () => ws)
         })
-        .catch(error => {
-          console.error('Failed to fetch WebSocket configuration:', error);
-        });
-      return null;
+        .catch((error) => {
+          console.error('Failed to fetch WebSocket configuration:', error)
+        })
+      return null
     }
 
     webSocketStore.getState().initializeWebSocket(t, handlers, connectWebsocket)
