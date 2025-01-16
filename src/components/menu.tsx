@@ -15,7 +15,7 @@ import { Webcam } from './webcam'
 import Slides from './slides'
 import Capture from './capture'
 import { multiModalAIServices } from '@/features/stores/settings'
-import { logout } from '@/utils/logout'  // 追加
+import { logout } from '@/utils/logout' // 追加
 
 export const Menu = () => {
   const selectAIService = settingsStore((s) => s.selectAIService)
@@ -182,38 +182,38 @@ export const Menu = () => {
                         onClick={toggleWebcam}
                       />
                     </div>
-<div className="order-4">
-  <IconButton
-    iconName="24/AddImage"
-    isProcessing={false}
-    onClick={() => imageFileInputRef.current?.click()}
-  />
-  <input
-    type="file"
-    className="hidden"
-    accept="image/*"
-    ref={imageFileInputRef}
-    onChange={(e) => {
-      const file = e.target.files?.[0]
-      if (file) {
-        const reader = new FileReader()
-        reader.onload = (e) => {
-          const imageUrl = e.target?.result as string
-          homeStore.setState({ modalImage: imageUrl })
-        }
-        reader.readAsDataURL(file)
-      }
-    }}
-  />
-</div>
-<div className="order-5">
-  <IconButton
-    iconName="24/Logout"
-    label={t('Logout')}
-    isProcessing={false}
-    onClick={logout}
-  />
-</div>
+                    <div className="order-4">
+                      <IconButton
+                        iconName="24/AddImage"
+                        isProcessing={false}
+                        onClick={() => imageFileInputRef.current?.click()}
+                      />
+                      <input
+                        type="file"
+                        className="hidden"
+                        accept="image/*"
+                        ref={imageFileInputRef}
+                        onChange={(e) => {
+                          const file = e.target.files?.[0]
+                          if (file) {
+                            const reader = new FileReader()
+                            reader.onload = (e) => {
+                              const imageUrl = e.target?.result as string
+                              homeStore.setState({ modalImage: imageUrl })
+                            }
+                            reader.readAsDataURL(file)
+                          }
+                        }}
+                      />
+                    </div>
+                    <div className="order-5">
+                      <IconButton
+                        iconName="24/Logout"
+                        label={t('Logout')}
+                        isProcessing={false}
+                        onClick={logout}
+                      />
+                    </div>
                   </>
                 )}
               {youtubeMode && (

@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 interface LoginContainerProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const LoginContainer: React.FC<LoginContainerProps> = ({ children }) => {
@@ -11,7 +11,7 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ children }) => {
         {children}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoginContainer;
+export default LoginContainer

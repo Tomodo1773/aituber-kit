@@ -27,10 +27,15 @@ export default function LoginForm() {
         <div className="mb-6 flex items-center justify-center">
           <LockClosedIcon className="h-12 w-12 text-blue-500" />
         </div>
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">ログイン</h2>
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+          ログイン
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="userId" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="userId"
+              className="block text-sm font-medium text-gray-700"
+            >
               ユーザーID
             </label>
             <input
@@ -45,7 +50,10 @@ export default function LoginForm() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               パスワード
             </label>
             <input
@@ -67,22 +75,26 @@ export default function LoginForm() {
                 type="checkbox"
                 className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+              <label
+                htmlFor="remember-me"
+                className="ml-2 block text-sm text-gray-900"
+              >
                 ログイン状態を保持
               </label>
             </div>
 
             <div className="text-sm">
-              <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
+              <a
+                href="#"
+                className="font-medium text-blue-600 hover:text-blue-500"
+              >
                 パスワードをお忘れですか？
               </a>
             </div>
           </div>
 
           {error && (
-            <div className="text-red-600 text-sm text-center">
-              {error}
-            </div>
+            <div className="text-red-600 text-sm text-center">{error}</div>
           )}
 
           <div>
@@ -106,4 +118,3 @@ export default function LoginForm() {
     </div>
   )
 }
-
